@@ -2,13 +2,12 @@
 import socket
 import json
 import threading
-import os
 import signal
 import sys
 
 # Configuration
 HOST = "0.0.0.0"  # Listen on all available interfaces
-PORT = int(os.getenv('PORT', 25565))  # Get port from environment or default to 25565
+PORT = 25565       # Hardcoded port number
 MOTD = "§aCustom MOTD§r\n§bNo real server here!"
 MAX_PLAYERS = 0
 CURRENT_PLAYERS = 0
