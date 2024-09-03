@@ -3,6 +3,8 @@ import socket
 import json
 import threading
 import os
+import signal
+import sys
 
 # Configuration
 HOST = "0.0.0.0"  # Listen on all available interfaces
@@ -45,18 +47,20 @@ def handle_connections():
         finally:
             conn.close()
 
+# Signal handler for graceful shutdown
+def signal_handler(sig, frame):
+    print("Stopping server...")
+    s.close()
+    sys.exit(0)
+
+# Register signal handler for SIGINT and SIGTERM
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
+
 # Run the connection handler in a separate thread
 connection_thread = threading.Thread(target=handle_connections, daemon=True)
 connection_thread.start()
 
-# Listen for the stop command
-while True:
-    command = input()
-    if command.lower() == "stop":
-        print("Stopping server...")
-        s.close()
-        break
-
-# Wait for the connection thread to finish
+# Keep the main thread alive
 connection_thread.join()
 print("Server stopped.")
