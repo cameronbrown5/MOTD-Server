@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 import socket
 import json
 
 # Configuration
 HOST = "0.0.0.0"  # Listen on all available interfaces
-PORT = 25560       # Change this to the port you want
+PORT = 25565       # Change this to the port you want
 MOTD = "§aCustom MOTD§r\n§bNo real server here!"
 MAX_PLAYERS = 0
 CURRENT_PLAYERS = 0
